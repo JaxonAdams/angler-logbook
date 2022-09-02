@@ -39,3 +39,64 @@ html, body {
     font-style: italic;
 }
 /* end header styling */
+
+/* hero styling */
+.hero {
+    height: 60vh;
+    width: 100%;
+    background: url(./assets/images/fishing-rods.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hero-info {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    padding: 1rem;
+    border-radius: 20px;
+    /* background-color: rgba(255, 255, 255, 0.05); */
+    /* backdrop-filter: blur(10px); */
+    width: 40vw;
+}
+
+.hero-title {
+    color: var(--txt-light);
+    font-weight: bolder;
+    font-size: 48px;
+    text-shadow: 5px 5px 10px var(--txt-dark);
+    font-family: var(--title-font);
+    margin: 0;
+}
+
+.hero-intro {
+    font-family: var(--reg-font);
+    font-style: italic;
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+    color: var(--color-secondary);
+}
+
+.btn-link {
+    text-decoration: none;
+    color: var(--txt-dark);
+    background-color: var(--color-secondary);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 2rem;
+    width: 150px;
+    text-align: center;
+    border-radius: 28px;
+    transition: all 0.3s ease;
+}
+
+.btn-link:hover {
+    background-color: var(--color-primary);
+    color: var(--txt-light);
+}
+/* end hero styling */
