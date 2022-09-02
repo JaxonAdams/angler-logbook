@@ -4,7 +4,7 @@ import { GeoAltFill, ThermometerHalf, Inboxes, Rulers } from 'react-bootstrap-ic
 const HomeInfo = () => {
     return (
         <div className='home-info'>
-            <h2 className='home-info-title'>We'll help you track...</h2>
+            <h2 className='home-info-title'>We'll help you log...</h2>
             <div className='info-icon-container'>
                 <div className='info-icon'>
                     <div className='icon-background'>
