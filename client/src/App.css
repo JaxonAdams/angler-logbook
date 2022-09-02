@@ -158,7 +158,7 @@ html, body {
     flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: center;
-    height: 40vh;
+    height: 400px;
 }
 
 .welcome-container {
@@ -215,7 +215,24 @@ html, body {
 
 
 /* media queries */
-@media screen and (max-width: 1000px) {}
+@media screen and (max-width: 1000px) {
+    .community-photo {
+        background-size: cover;
+    }
+
+    .community-photo, .community-photo::after {
+        width: 350px;
+        height: 200px;
+    }
+
+    .welcome-title {
+        font-size: 1.8rem;
+    }
+
+    .welcome-txt {
+        font-size: 1.2rem;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .hero {
@@ -238,11 +255,28 @@ html, body {
         background-color: var(--color-secondary);
         color: var(--txt-dark);
     }
+
+    .home-welcome {
+        flex-direction: column;
+        justify-content: space-around;
+        height: 600px;
+    }
+
+    .welcome-container {
+        width: 80vw;
+        text-align: center;
+    }
+
+    .welcome-img-container {
+        width: 80vw;
+    }
+
+    .welcome-img-container {
+        bottom: 50px;
+    }
 }
 
-@media screen and (max-width: 580px) {}
-
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 480px) {
     .hero-title {
         font-size: 36px;
     }
@@ -250,4 +284,15 @@ html, body {
     .hero-intro {
         font-size: 28px;
     }
+
+    .community-photo, .community-photo::after {
+        width: 250px;
+        height: 150px;
+    }
+
+    .home-info-title {
+        font-size: 1.5rem;
+    }
 }
+
+@media screen and (max-width: 375px) {}
