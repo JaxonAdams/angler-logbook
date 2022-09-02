@@ -58,8 +58,6 @@ html, body {
     margin: 50px;
     padding: 1rem;
     border-radius: 20px;
-    /* background-color: rgba(255, 255, 255, 0.05); */
-    /* backdrop-filter: blur(10px); */
     width: 40vw;
 }
 
@@ -100,3 +98,44 @@ html, body {
     color: var(--txt-light);
 }
 /* end hero styling */
+
+
+
+
+/* media queries */
+@media screen and (max-width: 1000px) {}
+
+@media screen and (max-width: 768px) {
+    .hero {
+        justify-content: center;
+    }
+
+    .hero-info {
+        margin: 0;
+        width: 80vw;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0,52,120,0.8);
+    }
+
+    .hero-title {
+        text-shadow: 3px 3px 15px var(--txt-dark);
+    }
+
+    .btn-link:hover {
+        background-color: var(--color-secondary);
+        color: var(--txt-dark);
+    }
+}
+
+@media screen and (max-width: 580px) {}
+
+@media screen and (max-width: 375px) {
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-intro {
+        font-size: 28px;
+    }
+}
