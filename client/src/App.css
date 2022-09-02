@@ -1,1 +1,41 @@
+/* css variables */
+:root {
+    --color-primary: #003478;
+    --color-secondary: #E8E10C;
+    --txt-light: #F4F4F4;
+    --txt-dark: #000000;
+    --title-font: 'Merriweather', serif;
+    --reg-font: 'Roboto', sans-serif;
+}
 
+html, body {
+    color: var(--txt-dark);
+    font-family: var(--reg-font);
+}
+
+/* header styling */
+.header {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-primary);
+    color: var(--txt-light);
+}
+
+.header a {
+    color: var(--txt-light);
+    text-decoration: none;
+}
+
+.header-title {
+    margin: 0;
+    padding: 1rem;
+    font-family: var(--title-font);
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.header-title span {
+    color: var(--color-secondary);
+    font-style: italic;
+}
+/* end header styling */
