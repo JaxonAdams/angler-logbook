@@ -6,10 +6,10 @@ import HomeInfo from '../components/HomeInfo';
 import HomeWelcome from '../components/HomeWelcome';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const Home = ({ menuOpen, setMenuOpen }) => {
     return (
         <div className='home'>
-            <Header />
+            <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Hero />
             <HomeInfo />
             <HomeWelcome />

@@ -53,6 +53,10 @@ html, body {
 .current-page a {
     color: var(--color-secondary);
 }
+
+.menu-btn, .menu-line {
+    display: none;
+}
 /* end header styling */
 
 /* hero styling */
@@ -260,6 +264,66 @@ html, body {
 }
 
 @media screen and (max-width: 768px) {
+    .noscroll {
+        overflow: hidden;
+        max-height: 100vh;
+    }
+
+    .menu-btn, .menu-line {
+        display: block;
+    }
+
+    .menu-btn {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 25px;
+        margin: 20px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .menu-line {
+        width: 30px;
+        height: 3px;
+        background-color: var(--txt-light);
+        transition: all 0.3s ease;
+    }
+
+    .close {
+        transform: rotate(180deg);
+    }
+
+    .close .menu-line:nth-child(1) {
+        transform: rotate(45deg) translateY(10.5px) translateX(5px);
+    }
+      
+    .close .menu-line:nth-child(2) {
+        opacity: 0;
+    }
+      
+    .close .menu-line:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10.5px) translateX(5px);
+    }
+
+    .header-nav {
+        margin: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        visibility: hidden;
+        height: 100%;
+        width: 50vw;
+        flex-direction: column;
+        background: var(--color-primary);
+    }
+
+    .header-nav.show {
+        visibility: visible;
+    }
+
     .hero {
         justify-content: center;
     }

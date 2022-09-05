@@ -2,10 +2,10 @@ import React from 'react';
 
 import Header from '../components/Header';
 
-const Signup = () => {
+const Signup = ({ menuOpen, setMenuOpen }) => {
     return (
         <div className='signup'>
-            <Header />
+            <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             Hello World
         </div>
     );

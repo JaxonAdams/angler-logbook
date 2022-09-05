@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ menuOpen, setMenuOpen }) => {
     const [activePage, setActivePage] = useState('');
 
     useEffect(() => {
@@ -14,8 +14,17 @@ const Header = () => {
             <Link to='/'>
                 <h1 className='header-title'>Angler's <span>Logbook</span></h1>
             </Link>
-            <div className={`header-nav ${activePage === 'signup' && 'current-page'}`}>
+            <div className={`
+                header-nav 
+                ${activePage === 'signup' && 'current-page'}
+                ${menuOpen && 'show'}
+            `}>
                 <Link to='/signup'>Sign Up</Link>
+            </div>
+            <div className={`menu-btn ${menuOpen && 'close'}`} onClick={() => setMenuOpen(!menuOpen)}>
+                <div className='menu-line' />
+                <div className='menu-line' />
+                <div className='menu-line' />
             </div>
         </header>
     );
