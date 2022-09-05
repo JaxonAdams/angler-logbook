@@ -28,6 +28,7 @@ html, body {
 .header a {
     color: var(--txt-light);
     text-decoration: none;
+    padding: 0.5rem;
 }
 
 .header-title {
@@ -50,8 +51,8 @@ html, body {
     margin: 0 1.5rem;
 }
 
-.current-page a {
-    color: var(--color-secondary);
+.current-page {
+    border-bottom: 3px solid var(--color-secondary);
 }
 
 .menu-btn, .menu-line {
@@ -317,11 +318,26 @@ html, body {
         height: 100%;
         width: 50vw;
         flex-direction: column;
+        justify-content: space-evenly;
         background: var(--color-primary);
     }
 
     .header-nav.show {
         visibility: visible;
+    }
+
+    .header-nav a {
+        font-size: 1.3rem;
+        width: 80%;
+        padding: 1rem 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .current-page {
+        color: var(--txt-light);
+        border-right: 5px solid var(--color-secondary);
+        border-bottom: none;
     }
 
     .hero {
