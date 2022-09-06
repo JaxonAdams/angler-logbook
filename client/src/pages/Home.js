@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -7,6 +7,10 @@ import HomeWelcome from '../components/HomeWelcome';
 import Footer from '../components/Footer';
 
 const Home = ({ menuOpen, setMenuOpen }) => {
+    useEffect(() => {
+        document.title = "Angler's Logbook"
+    }, []);
+
     return (
         <div className='home'>
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />

@@ -353,10 +353,16 @@ html, body {
     .signup-container {
         flex-flow: column nowrap;
         padding: 0;
+        height: auto;
     }
 
     .signup-form {
-        width: 80%;
+        width: 100%;
+    }
+
+    .signup-img {
+        height: 300px;
+        width: 70%;
     }
 }
 
@@ -500,4 +506,13 @@ html, body {
     }
 }
 
-@media screen and (max-width: 375px) {}
+@media screen and (max-width: 375px) {
+    .header-title {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .signup-img {
+        height: 200px;
+    }
+}

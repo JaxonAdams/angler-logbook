@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from '../components/Header';
 import SignupForm from '../components/SignupForm';
 
 const Signup = ({ menuOpen, setMenuOpen }) => {
+    useEffect(() => {
+        document.title = 'Sign Up';
+    }, []);
+
     return (
         <div className='signup'>
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
