@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <Home menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> } />
         <Route path='/signup' element={ <Signup menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> } />
+        <Route path='/login' element={ <Login menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> } />
       </Routes>
     </div>
   );
