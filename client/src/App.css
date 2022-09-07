@@ -262,7 +262,7 @@ html, body {
     justify-content: center;
 }
 
-.signup-form div {
+.signup-form div, .login-form div {
     border-bottom: 3px solid var(--color-primary);
     margin: 0 auto 1rem auto;
     padding: 0.5rem;
