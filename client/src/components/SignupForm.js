@@ -12,7 +12,7 @@ const SignupForm = () => {
             <input className='signup-form-input' type='email' placeholder='Email' />
             <input className='signup-form-input' type='password' placeholder='Password' />
             <button className='submit-btn' type='submit'>Sign Up</button>
-            <Link className='txt-link form-link' to='/'>Log In Instead</Link>
+            <Link className='txt-link form-link' to='/login'>Log In Instead</Link>
         </form>
     );
 };

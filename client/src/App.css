@@ -242,7 +242,7 @@ html, body {
 /* end footer styling */
 
 /* signup page styling */
-.signup-container {
+.signup-container, .login-container {
     width: 100%;
     height: 90vh;
     display: flex;
@@ -252,7 +252,7 @@ html, body {
     padding: 0;
 }
 
-.signup-form {
+.signup-form, .login-form {
     width: 40%;
     height: 90%;
     margin: 1.5rem;
@@ -270,7 +270,7 @@ html, body {
     text-align: center;
 }
 
-.signup-img {
+.signup-img, .login-img {
     width: 50%;
     height: 90%;
     margin: 1.5rem;
@@ -278,6 +278,15 @@ html, body {
     background-position: left;
     background-size: cover;
     border-radius: 20px;
+}
+
+.login-img {
+    background: url(./assets/images/login-img.jpg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+    border-radius: 20px;
+    height: 70%;
 }
 
 .form-title {
@@ -350,17 +359,21 @@ html, body {
         font-size: 1.2rem;
     }
 
-    .signup-container {
+    .signup-container, .login-container {
         flex-flow: column nowrap;
         padding: 0;
         height: auto;
     }
 
-    .signup-form {
+    .login-container {
+        flex-direction: column-reverse;
+    }
+
+    .signup-form, .login-form {
         width: 100%;
     }
 
-    .signup-img {
+    .signup-img, .login-img {
         height: 300px;
         width: 70%;
     }
@@ -512,7 +525,7 @@ html, body {
         margin: 0;
     }
 
-    .signup-img {
+    .signup-img, .login-img {
         height: 200px;
     }
 }

@@ -18,7 +18,7 @@ const Header = ({ menuOpen, setMenuOpen }) => {
                 header-nav 
                 ${menuOpen && 'show'}
             `}>
-                <Link to='/' className={`${activePage === 'login' ? 'current-page' : ''}`}>Log In</Link>
+                <Link to='/login' className={`${activePage === 'login' ? 'current-page' : ''}`}>Log In</Link>
             </div>
             <div className={`menu-btn ${menuOpen && 'close'}`} onClick={() => setMenuOpen(!menuOpen)}>
                 <div className='menu-line' />
