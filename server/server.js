@@ -1,7 +1,9 @@
 // import necessary modules
 const express = require('express');
 const path = require('path');
-// db config and routes should be imported here as well
+
+const db = require('./config/connection');
+// routes should be imported here as well
 
 // set up express instance
 const app = express();
@@ -18,4 +20,6 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // start server
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+db.once('open', () => {
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+});
