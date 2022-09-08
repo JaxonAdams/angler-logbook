@@ -29,6 +29,7 @@ html, body {
     color: var(--txt-light);
     text-decoration: none;
     padding: 0.5rem;
+    margin: 0 1rem;
 }
 
 .header-title {
@@ -433,7 +434,7 @@ html, body {
         height: 100%;
         width: 50vw;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: center;
         background: var(--color-primary);
     }
 
@@ -445,7 +446,7 @@ html, body {
         font-size: 1.3rem;
         width: 80%;
         padding: 1rem 0;
-        margin: 0 auto;
+        margin: 1rem auto;
         text-align: center;
     }
 
