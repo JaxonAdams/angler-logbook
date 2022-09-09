@@ -2,6 +2,9 @@
 const express = require('express');
 const path = require('path');
 
+// set up dotenv for local development
+require('dotenv').config();
+
 const db = require('./config/connection');
 // routes should be imported here as well
 
