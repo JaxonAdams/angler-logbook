@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config();
 
 const db = require('./config/connection');
-// routes should be imported here as well
+const routes = require('./routes');
 
 // set up express instance
 const app = express();
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 // express middleware to parse data, use routes, etc
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(routes);
+app.use('/api', routes);
 
 // if in production, provide static assets in build folder
 if (process.env.NODE_ENV === 'production') {
