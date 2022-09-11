@@ -30,6 +30,8 @@ router.get('/:id', ({ params }, res) => {
     });
 });
 
+// TODO: login route
+
 // POST create new user /api/users
 router.post('/', async ({ body }, res) => {
     // body expects name, email, and password
@@ -48,6 +50,42 @@ router.post('/', async ({ body }, res) => {
         console.log(err);
         res.status(500).json(err);
     };
+});
+
+// DELETE remove user /api/users/:id
+router.delete('/:id', ({ params }, res) => {
+    User.findOneAndDelete({ _id: params.id })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            return res.status(500).json({ message: 'User not found' });
+        };
+
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// PUT update user info /api/users/:id
+router.put('/:id', ({ params, body }, res) => {
+    User.findOneAndUpdate(
+        { _id: params.id },
+        body,
+        { new: true, runValidators: true }
+    )
+    .then(dbUserData => {
+        if (!dbUserData) {
+            return res.status(404).json({ message: 'User not found' });
+        };
+
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 module.exports = router;
