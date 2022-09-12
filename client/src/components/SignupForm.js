@@ -7,6 +7,7 @@ import auth from '../utils/auth';
 const SignupForm = () => {
     const [formState, setFormState] = useState({ name: '', email: '', password: '' });
     const [pwMatch, setPwMatch] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = e => {
         e.preventDefault();
@@ -41,8 +42,16 @@ const SignupForm = () => {
             // parse data
             const data = await response.json();
 
+            // error handling
+            if (!response.ok) {
+                if (data.code === 11000) {
+                    setErrorMessage('An account with that email already exists.');
+                };
+            };
+
             // if JWT included in response, log user in
             if (data.token) {
+                setErrorMessage('');
                 auth.login(data.token);
             };
         };
@@ -53,6 +62,8 @@ const SignupForm = () => {
             if (pwMatch) {
                 postData();
             };
+        } else {
+            setErrorMessage('Please enter all the required information.');
         };
     };
 
@@ -92,6 +103,7 @@ const SignupForm = () => {
             />
             <p className='form-txt'>Passwords match? {pwMatch ? <Check2Square /> : <XSquare />}</p>
             <button className='submit-btn' type='submit'>Sign Up</button>
+            {errorMessage && <p className='form-txt'>{errorMessage}</p>}
             <Link className='txt-link form-link' to='/login'>Log In Instead</Link>
         </form>
     );
