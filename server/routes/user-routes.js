@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 
 // GET all users /api/users
 router.get('/', (req, res) => {
@@ -30,20 +31,41 @@ router.get('/:id', ({ params }, res) => {
     });
 });
 
-// TODO: login route
+// POST login user /api/users/login
+router.post('/login', async ({ body }, res) => {
+    // body expects email and password
+    // e.g. { email: "example@gmail.com", password: "somepasswordhere" }
+    try {
+        const user = await User.findOne({ email: body.email }).select('-__v');
+
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        const correctPassword = await user.isCorrectPassword(body.password);
+
+        if (!correctPassword) return res.status(401).json({ message: 'Incorrect password' });
+
+        const token = signToken(user);
+
+        res.json({ user, token });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
+});
 
 // POST create new user /api/users
 router.post('/', async ({ body }, res) => {
     // body expects name, email, and password
-    //e.g. { name: "Jaxon Adams", email: "example@gmail.com", password: "somepasswordhere" }
+    // e.g. { name: "Jaxon Adams", email: "example@gmail.com", password: "somepasswordhere" }
     try {
         const user = await User.create(body);
 
-        // TODO: sign JWT here & send w/ res
+        // create JWT
+        const token = signToken(user);
 
         res.json({
             user,
-            // token
+            token
         });
 
     } catch (err) {
