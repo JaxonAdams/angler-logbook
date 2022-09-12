@@ -8,8 +8,8 @@ const expiration = '3h';
 // export several utility methods
 module.exports = {
     // creates a JWT on user creation or sign-in
-    signToken: function({ email, _id }) {
-        const payload = { email, _id };
+    signToken: function({ name, email, _id }) {
+        const payload = { name, email, _id };
 
         // return new JWT with user info and set expiration date
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
