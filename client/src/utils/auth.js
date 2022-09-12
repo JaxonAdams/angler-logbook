@@ -8,16 +8,26 @@ class AuthService {
         return localStorage.getItem('id_token');
     };
 
+    // get user's name from token info
+    getName() {
+        const token = this.getToken();
+        const decoded = decode(token);
+
+        return decoded.data.name;
+    };
+
     // check if token is expired
     isTokenExpired(token) {
         try {
             const decoded = decode(token);
-            if (decoded.exp < Date.now() / 1000) {
+
+            if (decoded.exp > (Date.now() / 1000)) {
                 return true;
             } else {
                 return false;
             };
-        } catch {
+        } catch (err) {
+            console.log(err);
             return false;
         };
     };
@@ -37,7 +47,10 @@ class AuthService {
     // check if user is logged in (token stored in localStorage)
     isLoggedIn() {
         const token = this.getToken();
-        return !token && !this.isTokenExpired();
+        if (token && this.isTokenExpired(token)) {
+            return true;
+        };
+        return false;
     };
 };
 

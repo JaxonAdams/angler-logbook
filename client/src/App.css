@@ -45,6 +45,14 @@ html, body {
     font-style: italic;
 }
 
+.header-greeting {
+    font-size: 1.2rem;
+}
+
+.header-greeting span {
+    color: var(--color-secondary);
+}
+
 .header-nav {
     display: flex;
     justify-content: space-evenly;
