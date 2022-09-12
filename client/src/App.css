@@ -308,6 +308,11 @@ html, body {
     font-style: italic;
 }
 
+.form-txt {
+    width: 100%;
+    text-align: center;
+}
+
 .signup-form-input {
     font-size: 1.2rem;
     width: 70%;

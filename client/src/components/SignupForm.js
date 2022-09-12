@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { XSquare, Check2Square } from 'react-bootstrap-icons';
 
 import auth from '../utils/auth';
 
 const SignupForm = () => {
     const [formState, setFormState] = useState({ name: '', email: '', password: '' });
+    const [pwMatch, setPwMatch] = useState(false);
 
     const handleChange = e => {
         e.preventDefault();
         setFormState({ ...formState, [e.target.name]: e.target.value });
+    };
+
+    const confirmPassword = e => {
+        e.preventDefault();
+
+        if (e.target.value === formState.password) {
+            setPwMatch(true);
+        } else if ((e.target.value !== formState.password) && pwMatch === true) {
+            setPwMatch(false);
+        };
     };
 
     const handleSubmit = e => {
@@ -37,7 +49,10 @@ const SignupForm = () => {
 
         // if form is complete, run fetch request
         if (formState.name && formState.email && formState.password) {
-            postData();
+            // also check that password matches confirmed password
+            if (pwMatch) {
+                postData();
+            };
         };
     };
 
@@ -68,6 +83,14 @@ const SignupForm = () => {
                 placeholder='Password'
                 onChange={handleChange} 
             />
+            <input 
+                className='signup-form-input'
+                type='password'
+                name='confirmPassword'
+                placeholder='Confirm Password'
+                onChange={confirmPassword}
+            />
+            <p className='form-txt'>Passwords match? {pwMatch ? <Check2Square /> : <XSquare />}</p>
             <button className='submit-btn' type='submit'>Sign Up</button>
             <Link className='txt-link form-link' to='/login'>Log In Instead</Link>
         </form>
