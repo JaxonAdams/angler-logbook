@@ -1,5 +1,8 @@
 // handles changes to global state based on specified action
 
+// import useReducer hook
+import { useReducer } from 'react';
+
 // import actions
 import {
     TOGGLE_NAV_MENU,
@@ -33,7 +36,7 @@ export const reducer = (state, action) => {
                 loginErrorMessage: action.loginErrorMessage
             };
 
-        case SET_LOGIN_FORM_STATE:
+		case SET_LOGIN_FORM_STATE:
             return {
                 ...state,
                 loginFormInfo: action.loginFormInfo
@@ -61,4 +64,9 @@ export const reducer = (state, action) => {
         default: 
             return state;
     };
+};
+
+// this is the medium through which the custum reducer() function will be used
+export function useStateReducer() {
+	return useReducer(reducer, initialState);
 };
