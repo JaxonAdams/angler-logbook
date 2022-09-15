@@ -17,24 +17,8 @@ const StoreProvider = ({ value = [], ...props }) => {
 		isMenuOpen: false,
 		// which page the user is currently viewing
 		activePage: '/',
-		// login error message
-		loginErrorMessage: '',
-		// login form
-		loginFormInfo: {
-			email: '',
-			password: ''
-		},
-		// do 'password' and 'confirm password' match?
-		pwMatch: false,
-		// signup error message
-		signupErrorMessage: '',
-		// signup form
-		signupFormInfo: {
-			name: '',
-			email: '',
-			password: ''
 		}
-	});
+	);
 	
 	// confirm the above works
 	console.log(state);
