@@ -1,19 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+// custom useContext hook for manipulating state
+import { useStoreContext } from '../utils/state/GlobalState';
+// state actions
+import { UPDATE_ACTIVE_PAGE, TOGGLE_NAV_MENU } from '../utils/state/actions';
 
 import auth from '../utils/auth';
 
-const Header = ({ menuOpen, setMenuOpen }) => {
-    const [activePage, setActivePage] = useState('');
+const Header = () => {
+    // destructure useStoreContext() return value
+    const [state, dispatch] = useStoreContext();
+    // pull necessary values from global state object
+    const { activePage, isMenuOpen } = state;
 
+    // set activePage state
     useEffect(() => {
         const location = window.location.pathname.split('/')[1];
-        setActivePage(location);
-    }, []);
+        // update global state with dispatch method
+        dispatch({
+            type: UPDATE_ACTIVE_PAGE,
+            activePage: location
+        });
+    }, [dispatch]);
 
     const handleLogout = e => {
         e.preventDefault();
         auth.logout();
+    };
+
+    const handleMenuOpen = () => {
+        dispatch({
+            type: TOGGLE_NAV_MENU,
+            isMenuOpen: !isMenuOpen
+        });
     };
 
     return (
@@ -23,7 +43,7 @@ const Header = ({ menuOpen, setMenuOpen }) => {
             </Link>
             <div className={`
                 header-nav 
-                ${menuOpen && 'show'}
+                ${isMenuOpen && 'show'}
             `}>
                 {auth.isLoggedIn() ? 
                     <>
@@ -37,7 +57,7 @@ const Header = ({ menuOpen, setMenuOpen }) => {
                     </>
                 }
             </div>
-            <div className={`menu-btn ${menuOpen && 'close'}`} onClick={() => setMenuOpen(!menuOpen)}>
+            <div className={`menu-btn ${isMenuOpen && 'close'}`} onClick={handleMenuOpen}>
                 <div className='menu-line' />
                 <div className='menu-line' />
                 <div className='menu-line' />
