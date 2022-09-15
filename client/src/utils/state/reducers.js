@@ -67,6 +67,6 @@ export const reducer = (state, action) => {
 };
 
 // this is the medium through which the custum reducer() function will be used
-export function useStateReducer() {
+export function useStateReducer(initialState) {
 	return useReducer(reducer, initialState);
 };

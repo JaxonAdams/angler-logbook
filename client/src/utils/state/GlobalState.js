@@ -47,3 +47,6 @@ const StoreProvider = ({ value = [], ...props }) => {
 const useStoreContext = () => {
 	return useContext(StoreContext);
 };
+
+// export custom provider and hook
+export { StoreProvider, useStoreContext };
