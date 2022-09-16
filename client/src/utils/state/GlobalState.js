@@ -20,9 +20,6 @@ const StoreProvider = ({ value = [], ...props }) => {
 		}
 	);
 	
-	// confirm the above works
-	console.log(state);
-
 	// return custom provider function
 	return <Provider value={[state, dispatch]} {...props} />;
 };

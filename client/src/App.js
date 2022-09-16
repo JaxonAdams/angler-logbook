@@ -2,18 +2,15 @@ import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
 
-import { StoreProvider, useStoreContext } from './utils/state/GlobalState';
+import { StoreProvider } from './utils/state/GlobalState';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
 function App() {
-  const [state] = useStoreContext();
-  const { isMenuOpen } = state;
-
   return (
-      <div className={`App ${isMenuOpen ? 'noscroll' : ''}`}>
+      <div className='App'>
           <StoreProvider>
               <Routes>
                   <Route path='/' element={ <Home /> } />

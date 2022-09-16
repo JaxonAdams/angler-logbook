@@ -24,16 +24,17 @@ const Header = () => {
         });
     }, [dispatch]);
 
-    const handleLogout = e => {
-        e.preventDefault();
-        auth.logout();
-    };
-
     const handleMenuOpen = () => {
         dispatch({
             type: TOGGLE_NAV_MENU,
             isMenuOpen: !isMenuOpen
         });
+    };
+
+    const handleLogout = e => {
+        e.preventDefault();
+        handleMenuOpen();
+        auth.logout();
     };
 
     return (
@@ -52,8 +53,8 @@ const Header = () => {
                     </>
                 :
                     <>
-                        <Link to='/signup' className={`${activePage === 'signup' ? 'current-page' : ''}`}>Sign Up</Link>
-                        <Link to='/login' className={`${activePage === 'login' ? 'current-page' : ''}`}>Log In</Link>
+                        <Link to='/signup' className={`${activePage === 'signup' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Sign Up</Link>
+                        <Link to='/login' className={`${activePage === 'login' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Log In</Link>
                     </>
                 }
             </div>
