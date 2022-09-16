@@ -19,7 +19,7 @@ app.use('/api', routes);
 
 // if in production, provide static assets in build folder
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '/client/build')));
 };
 
 // start server
