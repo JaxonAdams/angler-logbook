@@ -1,6 +1,5 @@
 {
   "name": "angler-logbook",
-  "homepage": "https://angler-logbook.vercel.app/",
   "description": "Fishing Log 2.0, Built with the MERN stack.",
   "version": "1.0.0",
   "main": "index.js",
@@ -22,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/JaxonAdams/angler-logbook/issues"
   },
-  "homepage": "https://github.com/JaxonAdams/angler-logbook#readme",
+  "homepage": "https://gitYou defined 2 builds that did not match any source fileshub.com/JaxonAdams/angler-logbook#readme",
   "devDependencies": {
     "concurrently": "^7.3.0"
   }

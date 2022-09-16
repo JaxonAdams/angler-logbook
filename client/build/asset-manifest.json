@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0edb012b.css",
+    "main.js": "/static/js/main.c57d1f04.js",
+    "static/media/fishing-rods.jpg": "/static/media/fishing-rods.a8e6dd5e29b90ac23e89.jpg",
+    "static/media/signup-img.jpg": "/static/media/signup-img.698dacf45c68e11ebd1b.jpg",
+    "static/media/login-img.jpg": "/static/media/login-img.0c6ec6c9f65f1431bc08.jpg",
+    "static/media/community-photo.jpg": "/static/media/community-photo.8a5356a74b14fe1103a3.jpg",
+    "index.html": "/index.html",
+    "main.0edb012b.css.map": "/static/css/main.0edb012b.css.map",
+    "main.c57d1f04.js.map": "/static/js/main.c57d1f04.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0edb012b.css",
+    "static/js/main.c57d1f04.js"
+  ]
+}

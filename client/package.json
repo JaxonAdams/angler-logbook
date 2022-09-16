@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "https://angler-logbook.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
