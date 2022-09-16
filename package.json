@@ -1,5 +1,6 @@
 {
   "name": "angler-logbook",
+  "homepage": "https://angler-logbook.vercel.app/",
   "description": "Fishing Log 2.0, Built with the MERN stack.",
   "version": "1.0.0",
   "main": "index.js",
