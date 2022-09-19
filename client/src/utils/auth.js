@@ -16,6 +16,14 @@ class AuthService {
         return decoded.data.name;
     };
 
+    // get user's id from token info
+    getId() {
+        const token = this.getToken();
+        const decoded = decode(token);
+
+        return decoded.data._id;
+    };
+
     // check if token is expired
     isTokenExpired(token) {
         try {
@@ -35,7 +43,7 @@ class AuthService {
     // store token in localStorage
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/');
+        window.location.assign('/dashboard');
     };
 
     // remove token from localStorage
