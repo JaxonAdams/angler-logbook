@@ -13,5 +13,29 @@ module.exports = {
 
         // return new JWT with user info and set expiration date
         return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    },
+
+    // checks that request carries a valid JWT (user logged in)
+    authMiddleware: function({ req }) {
+        // take token from the request body or auth header
+        let token = req.body.token || req.headers.Authorization;
+
+        // if token comes from auth header, reformat
+        if (req.headers.Authorization) {
+            token = token.split(' ').pop().trim();
+        };
+
+        if (!token) {
+            return req;
+        };
+
+        try {
+            const { data } = jwt.verify(token, secret, { maxAge: expiration });
+            req.user = data;
+        } catch (err) {
+            console.log('Invalid token: ' + err);
+        };
+
+        return req;
     }
 };
