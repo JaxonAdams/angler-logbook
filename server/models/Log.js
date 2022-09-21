@@ -39,7 +39,9 @@ const LogSchema = new Schema(
             maxlength: 250
         }
     },
-    {}
+    {
+        id: false
+    }
 );
 
 const Log = model('Log', LogSchema);
