@@ -19,7 +19,13 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             minlength: 4
-        }
+        },
+        logEntries: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Log'
+            }
+        ]
     },
     {
         toJSON: {
