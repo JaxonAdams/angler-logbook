@@ -7,6 +7,7 @@ const { signToken } = require('../utils/auth');
 router.get('/', (req, res) => {
     User.find({})
     .select('-__v -password')
+    .populate({ path: 'logEntries', select: '-__v' })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:id', ({ params }, res) => {
     User.findOne({ _id: params.id })
     .select('-__v -password')
+    .populate({ path: 'logEntries', select: '-__v' })
     .then(dbUserData => {
         if (!dbUserData) {
             return res.status(404).json({ message: 'User not found' });

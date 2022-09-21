@@ -19,12 +19,20 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             minlength: 4
-        }
+        },
+        logEntries: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Log'
+            }
+        ]
     },
     {
         toJSON: {
             virtuals: true
-        }
+        },
+        // no need for id value, _id is also returned
+        id: false
     }
 );
 
