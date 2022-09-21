@@ -12,6 +12,33 @@ router.get('/', (req, res) => {
         });
 });
 
+// GET log by id /api/logs/:id
+router.get('/:id', ({ params }, res) => {
+    Log.findOne({ _id: params.id })
+        .then(dbLogData => {
+            if (!dbLogData) return res.status(404).json({ message: 'Log not found' });
+            return res.json(dbLogData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// GET all logs by name /api/logs/:name
+router.get('/user/:name', ({ params }, res) => {
+    User.findOne({ name: params.name }).select('logEntries').populate({ path: 'logEntries' })
+        .then(dbUserData => {
+            if (!dbUserData) return res.status(404).json({ message: 'User not found' });
+
+            return res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 // POST new log /api/logs/
 router.post('/', ({ body }, res) => {
     // note: body should include userId
@@ -27,6 +54,38 @@ router.post('/', ({ body }, res) => {
             if (!dbUserData) return res.status(404).json({ message: 'User not found' });
 
             return res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// DELETE remove log /api/logs/:id
+router.delete('/:id', ({ params }, res) => {
+    Log.findOneAndDelete({ _id: params.id })
+        .then(dbLogData => {
+            if (!dbLogData) return res.status(404).json({ message: 'Log not found' });
+            
+            return res.json({ deleted: true, log: dbLogData });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// PUT update log /api/logs/:id
+router.put('/:id', ({ params, body }, res) => {
+    Log.findOneAndUpdate(
+        { _id: params.id },
+        body,
+        { new: true, runValidators: true }
+    )
+        .then(dbLogData => {
+            if (!dbLogData) return res.status(404).json({ message: 'Log not found' });
+
+            return res.json(dbLogData);
         })
         .catch(err => {
             console.log(err);
