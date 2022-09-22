@@ -23,6 +23,11 @@ const LogSchema = new Schema(
             type: String,
             required: true
         },
+        // angler's name
+        name: {
+            type: String,
+            required: true
+        },
 
         // optional fields
         // air temperature in F
