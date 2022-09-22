@@ -59,7 +59,7 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {user.logEntries && user.logEntries.sort((a,b) => a.date > b.date).map(entry => {
+                {user.logEntries && user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })}
             </div>
