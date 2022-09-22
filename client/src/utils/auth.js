@@ -43,13 +43,13 @@ class AuthService {
     // store token in localStorage
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/dashboard');
+        window.location.replace('/dashboard');
     };
 
     // remove token from localStorage
     logout() {
         localStorage.removeItem('id_token');
-        window.location.assign('/');
+        window.location.replace('/');
     };
 
     // check if user is logged in (token stored in localStorage)
