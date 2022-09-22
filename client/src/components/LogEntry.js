@@ -13,6 +13,10 @@ const LogEntry = ({ entry }) => {
     return (
         <div className='log-entry'>
             <p className='logged-name'>Caught by {entry.name} on {formatDate(entry.date)}</p>
+            <div className='logged-info-container'>
+                <p className='logged-info'>Fish: {entry.fish}</p>
+                <p className='logged-info'>Lure: {entry.lure}</p>
+            </div>
         </div>
     );
 };
