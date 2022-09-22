@@ -3,6 +3,7 @@ import auth from '../utils/auth';
 
 // import components
 import Header from '../components/Header';
+import LogEntry from '../components/LogEntry';
 
 const Dashboard = () => {
     // logged in user, set in useEffect hook
@@ -35,6 +36,8 @@ const Dashboard = () => {
         });
     }, []);
 
+    useEffect(() => console.log(user), [user]);
+
     // should name have "'s" or single "'"
     const formatWelcome = () => {
         // user data may not have fetched yet; if not, do not try to format
@@ -53,7 +56,13 @@ const Dashboard = () => {
     return (
         <div className='dashboard'>
             <Header />
-            <h1>{formatWelcome()}</h1>
+            <h1 className='dashboard-title'>{formatWelcome()}</h1>
+            <div className='entry-container'>
+               {/* sort entries by date, then render LogEntry for each entry */} 
+                {user.logEntries && user.logEntries.sort((a,b) => a.date > b.date).map(entry => {
+                    return <LogEntry entry={entry} key={entry._id} />;
+                })}
+            </div>
         </div>
     );
 };

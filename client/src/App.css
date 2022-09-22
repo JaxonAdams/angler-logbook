@@ -351,8 +351,16 @@ html, body {
 }
 /* end signup page styling */
 
-
-
+/* user dashboard styling */
+.dashboard-title {
+    font-family: var(--title-font);
+    text-align: center;
+    width: 70%;
+    margin: 2rem auto;
+    padding: 1.5rem 0;
+    border-bottom: 5px solid var(--color-primary);
+}
+/* end user dashboard styling */
 
 /* media queries */
 @media screen and (max-width: 1000px) {
