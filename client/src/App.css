@@ -387,6 +387,12 @@ html, body {
 .logged-info-container p {
     flex: 1;
 }
+
+.logged-location {
+	border-top: 1px solid var(--color-primary);
+	padding: 0.5rem 0;
+	margin: 0 auto;
+}
 /* end user dashboard styling */
 
 /* media queries */
