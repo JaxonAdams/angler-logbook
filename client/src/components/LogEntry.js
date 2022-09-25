@@ -17,6 +17,7 @@ const LogEntry = ({ entry }) => {
                 <p className='logged-info'>Fish: {entry.fish}</p>
                 <p className='logged-info'>Lure: {entry.lure}</p>
             </div>
+			<p className='logged-location'>Caught at {entry.location}</p>
         </div>
     );
 };
