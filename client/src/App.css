@@ -389,10 +389,32 @@ html, body {
 }
 
 .logged-location {
+    width: 90%;
 	border-top: 1px solid var(--color-primary);
 	padding: 0.5rem 0;
 	margin: 0 auto;
 }
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.logged-info {
+    flex: 1;
+}
+
+.additional-info-container {
+    width: 90%;
+    margin: 0 auto;
+    border-top: 1px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+};
+
 /* end user dashboard styling */
 
 /* media queries */
