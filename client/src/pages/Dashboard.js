@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { XCircleFill } from 'react-bootstrap-icons';
 import auth from '../utils/auth';
 
 // import components
@@ -53,9 +54,18 @@ const Dashboard = () => {
         };
     };
 
+    const openFormModal = () => {
+        document.getElementById('newEntryModal').showModal();
+    };
+
+    const closeFormModal = () => {
+        document.getElementById('newEntryModal').close();
+    };
+
     return (
         <div className='dashboard'>
             <Header />
+            <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
@@ -63,6 +73,13 @@ const Dashboard = () => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })}
             </div>
+            <dialog id='newEntryModal'>
+                <div className='close-btn-container'>
+                    <p className='modal-title'>New Log Entry</p>
+                    <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
+                </div>
+                <p>Hello World</p>
+            </dialog>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+// this file handles the API routes for fishing log entries
 const router = require('express').Router();
 
 const { Log, User } = require('../models');
@@ -62,12 +63,23 @@ router.post('/', ({ body }, res) => {
 });
 
 // DELETE remove log /api/logs/:id
-router.delete('/:id', ({ params }, res) => {
+router.delete('/:id', ({ params, body }, res) => {
     Log.findOneAndDelete({ _id: params.id })
         .then(dbLogData => {
             if (!dbLogData) return res.status(404).json({ message: 'Log not found' });
             
-            return res.json({ deleted: true, log: dbLogData });
+            res.json({ deleted: true, log: dbLogData });
+        })
+        .then(() => {
+            // pull log id from user's logEntries array
+            User.findOneAndUpdate(
+                { _id: body.userId },
+                { $pull: { logEntries: params.id } },
+                { new: true, runValidators: true }
+            )
+            .then(dbUserData => {
+                if (!dbUserData) return res.status(404).json({ message: 'User not found' });
+            });
         })
         .catch(err => {
             console.log(err);
