@@ -424,11 +424,17 @@ html, body {
 }
 
 dialog {
+    background-color: var(--txt-light);
     padding: 0.3rem 0.5rem;
     width: 70vw;
     font-size: 1.2rem;
     border-radius: 18px;
     border: 3px solid var(--color-primary);
+}
+
+dialog::backdrop {
+    background: linear-gradient(to top left, #003478, #E8E10C);
+    opacity: 0.5;
 }
 
 .modal-title {
