@@ -5,10 +5,16 @@ import auth from '../utils/auth';
 // import components
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
     // logged in user, set in useEffect hook
     const [user, setUser] = useState({});
+
+    // update page title
+    useEffect(() => {
+        document.title = 'Dashboard';
+    }, []);
 
     // get user
     useEffect(() => {
@@ -39,27 +45,28 @@ const Dashboard = () => {
 
     useEffect(() => console.log(user), [user]);
 
-    // should name have "'s" or single "'"
+    // format proper plural of user's name
     const formatWelcome = () => {
-        // user data may not have fetched yet; if not, do not try to format
-        if (user.name) {
+        // pull name from JWT
+        const name = auth.getName().split(' ')[0];
 
-            const lastLetter = user.name.split('')[user.name.length - 1];
-
-            if (lastLetter === 's' || lastLetter === 'S') {
-                return `${user.name}' Fishing Log`;
-            };
-
-            return `${user.name}'s Fishing Log`;
-        };
+        // format welcome based on first name
+        return name[name.length - 1] === 's' ? `${name}' Fishing Log` : `${name}'s Fishing Log`;
     };
 
     const openFormModal = () => {
-        document.getElementById('newEntryModal').showModal();
+		const modal = document.getElementById('newEntryModal'); 
+		modal.showModal();
     };
 
     const closeFormModal = () => {
-        document.getElementById('newEntryModal').close();
+		const modal = document.getElementById('newEntryModal'); 
+		modal.setAttribute('closing', true);
+
+		modal.addEventListener('animationend', () => {
+			modal.removeAttribute('closing');
+			modal.close();
+		}, { once: true });
     };
 
     return (
@@ -69,9 +76,12 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {user.logEntries && user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
+                {user.logEntries ? user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
-                })}
+                })
+                :
+                    <p className='form-txt'>Loading...</p>
+                }
             </div>
             <dialog id='newEntryModal'>
                 <div className='close-btn-container'>
@@ -80,6 +90,7 @@ const Dashboard = () => {
                 </div>
                 <p>Hello World</p>
             </dialog>
+            <Footer />
         </div>
     );
 };
