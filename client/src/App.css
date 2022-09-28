@@ -430,6 +430,11 @@ dialog {
     font-size: 1.2rem;
     border-radius: 18px;
     border: 3px solid var(--color-primary);
+    box-shadow: 0 0 0 100vw rgb(0 52 120 / 0.5); 
+}
+
+dialog::backdrop {
+    opacity: 0;
 }
 
 dialog[open] {
@@ -440,18 +445,18 @@ dialog[closing] {
 	animation: 0.3s fade-out forwards;
 }
 
-dialog::backdrop {
-    background: linear-gradient(to top left, #003478, #E8E10C);
-    opacity: 0.5;
-}
+/* dialog::backdrop { */
+/*     background: linear-gradient(to top left, #003478, #E8E10C); */
+/*     opacity: 0.5; */
+/* } */
 
-dialog[open]::backdrop {
-	animation: 0.5s fade-in-bg forwards;
-}
+/* dialog[open]::backdrop { */
+/* 	animation: 0.5s fade-in-bg forwards; */
+/* } */
 
-dialog[closing]::backdrop {
-	animation: 0.3s fade-out-bg forwards;
-}
+/* dialog[closing]::backdrop { */
+/* 	animation: 0.3s fade-out-bg forwards; */
+/* } */
 
 .modal-title {
     margin: 0 1rem; 
