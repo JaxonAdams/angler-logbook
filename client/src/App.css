@@ -515,6 +515,21 @@ dialog[closing] {
         height: 300px;
         width: 70%;
     }
+
+    .dashboard-title {
+        margin-top: 0rem;
+    }
+
+    .open-modal-container {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .open-modal {
+        float: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -636,6 +651,14 @@ dialog[closing] {
     .logged-info-container {
         flex-direction: column;
     }
+
+    .dashboard-title {
+        width: 85%;
+    }
+
+    .log-entry {
+        width: 85%;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -658,6 +681,10 @@ dialog[closing] {
 
     .header-nav {
         width: 80vw;
+    }
+    
+    .flex-row {
+        flex-direction: column;
     }
 }
 
