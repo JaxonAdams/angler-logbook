@@ -72,7 +72,9 @@ const Dashboard = () => {
     return (
         <div className='dashboard'>
             <Header />
-            <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
+            <div className='open-modal-container'>
+                <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
+            </div>
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
@@ -90,7 +92,8 @@ const Dashboard = () => {
                 </div>
                 <p>Hello World</p>
             </dialog>
-            <Footer />
+            {/* I only want the footer to display once logs have loaded */}
+            {user.logEntries && <Footer />}
         </div>
     );
 };
