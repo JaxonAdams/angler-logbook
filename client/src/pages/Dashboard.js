@@ -55,11 +55,18 @@ const Dashboard = () => {
     };
 
     const openFormModal = () => {
-        document.getElementById('newEntryModal').showModal();
+		const modal = document.getElementById('newEntryModal'); 
+		modal.showModal();
     };
 
     const closeFormModal = () => {
-        document.getElementById('newEntryModal').close();
+		const modal = document.getElementById('newEntryModal'); 
+		modal.setAttribute('closing', true);
+
+		modal.addEventListener('animationend', () => {
+			modal.removeAttribute('closing');
+			modal.close();
+		}, { once: true });
     };
 
     return (

@@ -432,9 +432,25 @@ dialog {
     border: 3px solid var(--color-primary);
 }
 
+dialog[open] {
+	animation: 0.5s slide-up forwards, 0.5s fade-in forwards;
+}
+
+dialog[closing] {
+	animation: 0.3s fade-out forwards;
+}
+
 dialog::backdrop {
     background: linear-gradient(to top left, #003478, #E8E10C);
     opacity: 0.5;
+}
+
+dialog[open]::backdrop {
+	animation: 0.5s fade-in-bg forwards;
+}
+
+dialog[closing]::backdrop {
+	animation: 0.3s fade-out-bg forwards;
 }
 
 .modal-title {
@@ -452,7 +468,7 @@ dialog::backdrop {
 
 .modal-close {
     color: var(--color-primary);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 /* end user dashboard styling */
@@ -649,4 +665,56 @@ dialog::backdrop {
     .signup-img, .login-img {
         height: 200px;
     }
+}
+
+/* animation keyframes */
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;	
+	}
+}
+
+@keyframes fade-in-bg {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-out-bg {
+	0% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateY(100%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}
 }
