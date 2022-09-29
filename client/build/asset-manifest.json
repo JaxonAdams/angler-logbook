@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.b5996456.css",
-    "main.js": "/static/js/main.f7ce7301.js",
+    "main.css": "/static/css/main.b628bcb3.css",
+    "main.js": "/static/js/main.e8101f1e.js",
     "static/media/fishing-rods.jpg": "/static/media/fishing-rods.a8e6dd5e29b90ac23e89.jpg",
     "static/media/signup-img.jpg": "/static/media/signup-img.698dacf45c68e11ebd1b.jpg",
     "static/media/login-img.jpg": "/static/media/login-img.0c6ec6c9f65f1431bc08.jpg",
     "static/media/community-photo.jpg": "/static/media/community-photo.8a5356a74b14fe1103a3.jpg",
     "index.html": "/index.html",
-    "main.b5996456.css.map": "/static/css/main.b5996456.css.map",
-    "main.f7ce7301.js.map": "/static/js/main.f7ce7301.js.map"
+    "main.b628bcb3.css.map": "/static/css/main.b628bcb3.css.map",
+    "main.e8101f1e.js.map": "/static/js/main.e8101f1e.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5996456.css",
-    "static/js/main.f7ce7301.js"
+    "static/css/main.b628bcb3.css",
+    "static/js/main.e8101f1e.js"
   ]
 }
