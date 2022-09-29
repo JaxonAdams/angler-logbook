@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { XCircleFill } from 'react-bootstrap-icons';
 import auth from '../utils/auth';
+import { useStoreContext } from '../utils/state/GlobalState';
 
 // import components
 import Header from '../components/Header';
@@ -13,6 +14,10 @@ const Dashboard = () => {
     const [user, setUser] = useState({});
     // is the modal open? will be used to disable scroll when open
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // pull isMenuOpen from global store
+    const [state] = useStoreContext();
+    const { isMenuOpen } = state;
 
     // update page title
     useEffect(() => {
@@ -79,7 +84,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className='dashboard'>
+        <div className={`dashboard ${isMenuOpen ? 'noscroll' : ''}`}>
             <Header />
             <div className='open-modal-container'>
                 <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
