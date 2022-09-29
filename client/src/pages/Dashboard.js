@@ -5,6 +5,7 @@ import auth from '../utils/auth';
 // import components
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
+import LogEntryForm from '../components/LogEntryForm';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {
@@ -90,7 +91,7 @@ const Dashboard = () => {
                     <p className='modal-title'>New Log Entry</p>
                     <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
                 </div>
-                <p>Hello World</p>
+                <LogEntryForm />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
             {user.logEntries && <Footer />}

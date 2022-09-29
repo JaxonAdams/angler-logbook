@@ -476,6 +476,37 @@ dialog[closing] {
     font-size: 1.5rem;
     cursor: pointer;
 }
+
+.log-entry-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log-entry-form div {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.entry-form-input {
+    font-size: 1.2rem;
+    width: 70%;
+    margin: 0 auto 0.5rem auto;
+    padding: 0.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+}
+
+.form-input-sm {
+    width: 45%;
+}
+
+.entry-form-submit {
+    margin: 0.5rem auto;
+    width: 70%;
+}
 /* end user dashboard styling */
 
 /* media queries */
@@ -529,6 +560,14 @@ dialog[closing] {
 
     .open-modal {
         float: none;
+    }
+
+    .log-entry-form div {
+        flex-direction: column;
+    }
+
+    .form-input-sm {
+        width: 90%;
     }
 }
 
@@ -659,6 +698,10 @@ dialog[closing] {
     .log-entry {
         width: 85%;
     }
+
+    .entry-form-input {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -685,6 +728,14 @@ dialog[closing] {
     
     .flex-row {
         flex-direction: column;
+    }
+
+    .entry-form-input {
+        font-size: 0.9rem;
+    }
+
+    dialog {
+        width: 90%;
     }
 }
 
