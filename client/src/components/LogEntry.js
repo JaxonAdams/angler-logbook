@@ -2,7 +2,6 @@ import React from 'react';
 
 const LogEntry = ({ entry }) => {
     const formatDate = date => {
-        console.log(date);
         const day = date.split('T')[0].split('-')[2];
         const month = date.split('T')[0].split('-')[1];
         const year = date.split('T')[0].split('-')[0];
