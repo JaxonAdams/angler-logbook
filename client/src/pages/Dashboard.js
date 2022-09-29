@@ -5,11 +5,14 @@ import auth from '../utils/auth';
 // import components
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
+import LogEntryForm from '../components/LogEntryForm';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {
     // logged in user, set in useEffect hook
     const [user, setUser] = useState({});
+    // is the modal open? will be used to disable scroll when open
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // update page title
     useEffect(() => {
@@ -43,7 +46,11 @@ const Dashboard = () => {
         });
     }, []);
 
-    useEffect(() => console.log(user), [user]);
+    useEffect(() => {
+        isModalOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible';
+    }, [isModalOpen]);
+
+    // useEffect(() => console.log(user), [user]);
 
     // format proper plural of user's name
     const formatWelcome = () => {
@@ -57,6 +64,7 @@ const Dashboard = () => {
     const openFormModal = () => {
 		const modal = document.getElementById('newEntryModal'); 
 		modal.showModal();
+        setIsModalOpen(true);
     };
 
     const closeFormModal = () => {
@@ -66,6 +74,7 @@ const Dashboard = () => {
 		modal.addEventListener('animationend', () => {
 			modal.removeAttribute('closing');
 			modal.close();
+            setIsModalOpen(false);
 		}, { once: true });
     };
 
@@ -78,7 +87,7 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {user.logEntries ? user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
+                {(user && user.logEntries) ? user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })
                 :
@@ -90,7 +99,7 @@ const Dashboard = () => {
                     <p className='modal-title'>New Log Entry</p>
                     <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
                 </div>
-                <p>Hello World</p>
+                <LogEntryForm />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
             {user.logEntries && <Footer />}
