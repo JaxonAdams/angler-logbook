@@ -42,7 +42,7 @@ router.get('/user/:name', ({ params }, res) => {
 
 // POST new log /api/logs/
 router.post('/', ({ body }, res) => {
-    // note: body should include userId
+    // note: body should include userId and name
     Log.create(body)
         .then(({ _id }) => {
             return User.findOneAndUpdate(
