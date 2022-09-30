@@ -507,6 +507,10 @@ dialog[closing] {
     margin: 0.5rem auto;
     width: 70%;
 }
+
+.form-txt-sm {
+    font-size: 0.8rem;
+}
 /* end user dashboard styling */
 
 /* media queries */
