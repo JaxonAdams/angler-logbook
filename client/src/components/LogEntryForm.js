@@ -74,6 +74,19 @@ const LogEntryForm = () => {
                 && formState.date
             ) {
                 setErrorMessage('');
+                setFormState({
+                    name: '',
+                    userId: '',
+                    location: '',
+                    fish: '',
+                    lure: '',
+                    date: '',
+                    airTemp: '',
+                    waterTemp: '',
+                    length: '',
+                    weight: '',
+                    other: ''
+                });
                 postData();
             } else {
                 console.log('Error: Required fields left blank');
