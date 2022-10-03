@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import auth from '../utils/auth';
 
-const LogEntryForm = () => {
+const LogEntryForm = ({ closeFormModal, fetchData, setUser }) => {
     // form state obj
     // 'name' and 'userId' will be pulled from JWT on submit
     const [formState, setFormState] = useState({
@@ -58,8 +58,11 @@ const LogEntryForm = () => {
                 return console.log('Error sending log entry...');
             };
 
-            // reload page
-            window.location.reload();
+            // close form modal
+            closeFormModal();
+
+            // refetch log entries and set them to display
+            fetchData().then(userData => setUser(userData));
         };
 
         // validation; first checking that 'other' is under char limit
