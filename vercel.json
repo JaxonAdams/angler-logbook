@@ -5,7 +5,7 @@
        { "src": "./client/build", "use": "@vercel/static" }
     ],
     "redirects": [
-        { "src": "/[^.]+", "dest": "/", "status": "200" } 
+        { "source": "/[^.]+", "destination": "/" } 
     ]
 }
 
