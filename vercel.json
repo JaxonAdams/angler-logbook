@@ -4,8 +4,6 @@
        { "src": "./server/server.js", "use": "@vercel/node" },
        { "src": "./client/build", "use": "@vercel/static" }
     ],
-    "redirects": [
-        { "source": "/[^.]+", "destination": "/" } 
-    ]
+    "routes": [{ "src": "/[^.]+", "dest": "/": "status": 200 }]
 }
 
