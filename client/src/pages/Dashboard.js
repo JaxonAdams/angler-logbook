@@ -31,21 +31,6 @@ const Dashboard = () => {
             window.location.assign('/login');
         };
 
-        // get user id from JWT
-        const userId = auth.getId();
-
-        // fetch user data
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/users/${userId}`);
-                const data = await response.json();
-
-                return { ...data };
-            } catch (err) {
-                console.log(err);
-            };
-        };
-
         fetchData().then(data => {
             setUser(data);
         });
@@ -64,6 +49,21 @@ const Dashboard = () => {
 
         // format welcome based on first name
         return name[name.length - 1] === 's' ? `${name}' Fishing Log` : `${name}'s Fishing Log`;
+    };
+
+    // fetch user data
+    const fetchData = async () => {
+        // get user id from JWT
+        const userId = auth.getId();
+
+        try {
+            const response = await fetch(`/api/users/${userId}`);
+            const data = await response.json();
+
+            return { ...data };
+        } catch (err) {
+            console.log(err);
+        };
     };
 
     const openFormModal = () => {
@@ -104,7 +104,7 @@ const Dashboard = () => {
                     <p className='modal-title'>New Log Entry</p>
                     <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
                 </div>
-                <LogEntryForm />
+                <LogEntryForm closeFormModal={closeFormModal} fetchData={fetchData} setUser={setUser} />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
             {user.logEntries && <Footer />}
