@@ -5,14 +5,7 @@
        { "src": "./client/build", "use": "@vercel/static" }
     ],
     "rewrites": [
-        {
-          "source": "/((?!api/.*).*)",
-          "destination": "/client/build/index.html"
-        },
-        {
-          "source": "/(.*)",
-          "destination": "/server/server.js"
-        }
+        "routes": [{ "src": "/[^.]+", "dest": "/", "status": "200" }] 
     ]
 }
 
