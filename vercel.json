@@ -6,12 +6,12 @@
     ],
     "rewrites": [
         {
-            "source": "/dashboard",
-            "destination": "/client/build/index.html"
-        },
-        {
           "source": "/(.*)",
           "destination": "/server/server.js"
+        },
+        {
+            "source": "/dashboard",
+            "destination": "/client/build/index.html"
         }
     ]
 }
