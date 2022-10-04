@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:id', ({ params }, res) => {
     User.findOne({ _id: params.id })
     .select('-__v -password')
+    .sort('date')
     .populate({ path: 'logEntries', select: '-__v' })
     .then(dbUserData => {
         if (!dbUserData) {

@@ -12,6 +12,8 @@ import Footer from '../components/Footer';
 const Dashboard = () => {
     // logged in user, set in useEffect hook
     const [user, setUser] = useState({});
+    // the logEntries array from user obj, reversed for display
+    // const [reversedEntries, setReversedEntries] = useState([]);
     // is the modal open? will be used to disable scroll when open
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -36,11 +38,23 @@ const Dashboard = () => {
         });
     }, []);
 
+    // disable scroll if modal is open, if not open endable scroll
     useEffect(() => {
         isModalOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible';
     }, [isModalOpen]);
 
-    // useEffect(() => console.log(user), [user]);
+    // reverse logEntry array for display
+    // useEffect(() => {
+    //     if (user.logEntries) {
+    //         if (user.logEntries.reverse() !== reversedEntries) {
+    //             const reversed = user.logEntries.reverse();
+
+    //             setReversedEntries(reversed);
+
+    //             console.log(reversed);
+    //         };
+    //     };
+    // });
 
     // format proper plural of user's name
     const formatWelcome = () => {
@@ -92,7 +106,7 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {(user && user.logEntries) ? user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
+                {(user && user.logEntries) ? user.logEntries.slice(0).reverse().map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })
                 :
