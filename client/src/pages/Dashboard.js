@@ -12,8 +12,6 @@ import Footer from '../components/Footer';
 const Dashboard = () => {
     // logged in user, set in useEffect hook
     const [user, setUser] = useState({});
-    // the logEntries array from user obj, reversed for display
-    // const [reversedEntries, setReversedEntries] = useState([]);
     // is the modal open? will be used to disable scroll when open
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,19 +40,6 @@ const Dashboard = () => {
     useEffect(() => {
         isModalOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible';
     }, [isModalOpen]);
-
-    // reverse logEntry array for display
-    // useEffect(() => {
-    //     if (user.logEntries) {
-    //         if (user.logEntries.reverse() !== reversedEntries) {
-    //             const reversed = user.logEntries.reverse();
-
-    //             setReversedEntries(reversed);
-
-    //             console.log(reversed);
-    //         };
-    //     };
-    // });
 
     // format proper plural of user's name
     const formatWelcome = () => {
@@ -97,11 +82,29 @@ const Dashboard = () => {
 		}, { once: true });
     };
 
+    const openFilterModal = () => {
+        const modal = document.getElementById('filterEntryModal');
+        modal.showModal();
+        setIsModalOpen(true);
+    };
+
+    const closeFilterModal = () => {
+        const modal = document.getElementById('filterEntryModal');
+        modal.setAttribute('closing', true);
+
+        modal.addEventListener('animationend', () => {
+            modal.removeAttribute('closing');
+            modal.close();
+            setIsModalOpen(false);
+        }, { once: true });
+    };
+
     return (
         <div className={`dashboard ${isMenuOpen ? 'noscroll' : ''}`}>
             <Header />
             <div className='open-modal-container'>
                 <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
+                <button className='btn-link open-modal' onClick={() => openFilterModal()}>Filter Entries</button>
             </div>
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
@@ -119,6 +122,12 @@ const Dashboard = () => {
                     <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
                 </div>
                 <LogEntryForm closeFormModal={closeFormModal} fetchData={fetchData} setUser={setUser} />
+            </dialog>
+            <dialog id='filterEntryModal'>
+                <div className='close-btn-container'>
+                    <p className='modal-title'>Apply Filter</p>
+                    <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
+                </div>
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
             {user.logEntries && <Footer />}

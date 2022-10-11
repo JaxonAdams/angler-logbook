@@ -356,7 +356,7 @@ html, body {
     font-family: var(--title-font);
     text-align: center;
     width: 70%;
-    margin: 2rem auto;
+    margin: 1rem auto 2rem auto;
     padding: 1.5rem 0;
     border-bottom: 5px solid var(--color-primary);
 }
@@ -415,12 +415,20 @@ html, body {
     justify-content: space-evenly;
 }
 
+.open-modal-container {
+    width: 100%;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .open-modal {
     font-weight: normal;
     width: auto;
+    margin: 1rem;
     border: 2px solid var(--color-primary);
     cursor: pointer;
-    float: right;
+    flex: 1;
 }
 
 dialog {
@@ -553,13 +561,6 @@ dialog[closing] {
 
     .dashboard-title {
         margin-top: 0rem;
-    }
-
-    .open-modal-container {
-        width: 100%;
-        margin: 0;
-        display: flex;
-        justify-content: center;
     }
 
     .open-modal {
@@ -705,6 +706,10 @@ dialog[closing] {
 
     .entry-form-input {
         font-size: 1rem;
+    }
+
+    .open-modal-container {
+        justify-content: center;
     }
 }
 
