@@ -7,11 +7,13 @@ import { useStoreContext } from '../utils/state/GlobalState';
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
 import LogEntryForm from '../components/LogEntryForm';
+import FilterEntryForm from '../components/FilterEntryForm';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {
     // logged in user, set in useEffect hook
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
+    const [logEntries, setLogEntries] = useState([]);
     // is the modal open? will be used to disable scroll when open
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,8 +33,8 @@ const Dashboard = () => {
             window.location.assign('/login');
         };
 
-        fetchData().then(data => {
-            setUser(data);
+        fetchData().then(({logEntries}) => {
+            setLogEntries(logEntries);
         });
     }, []);
 
@@ -109,7 +111,7 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {(user && user.logEntries) ? user.logEntries.slice(0).reverse().map(entry => {
+                {logEntries ? logEntries.slice(0).reverse().map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })
                 :
@@ -121,16 +123,17 @@ const Dashboard = () => {
                     <p className='modal-title'>New Log Entry</p>
                     <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
                 </div>
-                <LogEntryForm closeFormModal={closeFormModal} fetchData={fetchData} setUser={setUser} />
+                <LogEntryForm closeFormModal={closeFormModal} fetchData={fetchData} setLogEntries={setLogEntries} />
             </dialog>
             <dialog id='filterEntryModal'>
                 <div className='close-btn-container'>
                     <p className='modal-title'>Apply Filter</p>
                     <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
                 </div>
+                <FilterEntryForm closeFilterModal={closeFilterModal} setLogEntries={setLogEntries} />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
-            {user.logEntries && <Footer />}
+            {logEntries && <Footer />}
         </div>
     );
 };
