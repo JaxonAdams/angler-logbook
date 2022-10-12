@@ -11,9 +11,10 @@ import FilterEntryForm from '../components/FilterEntryForm';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {
-    // logged in user, set in useEffect hook
-    // const [user, setUser] = useState({});
+    // user's log entries, set in useEffect hook
     const [logEntries, setLogEntries] = useState([]);
+    // filtered entries
+    const [filteredEntries, setFilteredEntries] = useState([]);
     // is the modal open? will be used to disable scroll when open
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -111,10 +112,14 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {logEntries ? logEntries.slice(0).reverse().map(entry => {
+                {filteredEntries.length ? filteredEntries.slice(0).reverse().map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })
                 :
+                    logEntries.length ? logEntries.slice(0).reverse().map(entry => {
+                        return <LogEntry entry={entry} key={entry._id} />
+                    })
+                    :
                     <p className='form-txt'>Loading...</p>
                 }
             </div>
@@ -127,13 +132,13 @@ const Dashboard = () => {
             </dialog>
             <dialog id='filterEntryModal'>
                 <div className='close-btn-container'>
-                    <p className='modal-title'>Apply Filter</p>
+                    <p className='modal-title'>Filter Entries</p>
                     <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
                 </div>
-                <FilterEntryForm closeFilterModal={closeFilterModal} setLogEntries={setLogEntries} />
+                <FilterEntryForm closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
-            {logEntries && <Footer />}
+            {filteredEntries.length ? <Footer /> : ''}
         </div>
     );
 };

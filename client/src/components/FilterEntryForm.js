@@ -1,14 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const FilterEntryForm = ({ closeFilterModal, setLogEntries }) => {
+const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) => {
+    const [appliedFilters, setAppliedFilters] = useState({ location: '', date: '' });
+
+    // format date to match date in logEntries obj
+    const formatDate = date => {
+        return date ? date.concat('T00:00:00.000Z') : '';
+    };
+    
+    // filter logEntries array using appliedFilters state obj
+    const filterList = () => {
+        let filteredLogEntries = [ ...logEntries ];
+
+        // use for...in statement to iterate over appliedFilters obj
+        for (const filterField in appliedFilters) {
+            // if key has truthy value...
+            if (appliedFilters[filterField]) {
+                // console.log(`${filterField}: ${appliedFilters[filterField]}`);
+
+                filteredLogEntries = filteredLogEntries.filter(entry => {
+                    return entry[filterField].toLowerCase() === appliedFilters[filterField].toLowerCase();
+                });
+            };
+        };
+
+        setFilteredEntries(filteredLogEntries);
+    };
+
+    const handleChange = e => {
+        e.preventDefault();
+
+        /* I want each date to match the format of dates in each log entry,    
+        making sure they match now will make it easier to filter based on dates later */
+        if (e.target.name === 'date') {
+            const formattedDate = formatDate(e.target.value);
+            return setAppliedFilters({ ...appliedFilters, date: formattedDate });
+        };
+
+        // set value in state object
+        setAppliedFilters({ ...appliedFilters, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        
+        filterList();
+
+        closeFilterModal();
+    };
+    
     return (
-        <form className='log-entry-form filter-entry-form'>
-            <p className='form-txt'>Filter Your Log Entries</p>
+        <form className='log-entry-form filter-entry-form' onSubmit={handleSubmit}>
+            <p className='form-txt' style={{fontStyle: 'italic'}}>Display all entries whose fields match the below...</p>
             <input 
                 className='entry-form-input'
                 type='text'
                 name='location'
                 placeholder='Location'
+                defaultValue={appliedFilters.location}
+                onChange={handleChange}
             />
             <div>
                 <label htmlFor='date'>Date Caught: </label>
@@ -16,8 +66,11 @@ const FilterEntryForm = ({ closeFilterModal, setLogEntries }) => {
                     className='entry-form-input'
                     type='date'
                     name='date'
+                    defaultValue={appliedFilters.date}
+                    onChange={handleChange}
                 />
             </div>
+            <button className='submit-btn entry-form-submit' type='submit'>Apply Filter</button>
         </form>
     );
 };
