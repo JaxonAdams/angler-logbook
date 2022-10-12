@@ -138,7 +138,7 @@ const Dashboard = () => {
                 <FilterEntryForm closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
-            {filteredEntries.length ? <Footer /> : ''}
+            {filteredEntries.length > 1 ? <Footer /> : ''}
         </div>
     );
 };
