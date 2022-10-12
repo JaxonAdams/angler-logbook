@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) => {
-    const [appliedFilters, setAppliedFilters] = useState({ location: '', date: '' });
+    const [appliedFilters, setAppliedFilters] = useState({ location: '', date: '', fish: '', lure: '' });
 
     // format date to match date in logEntries obj
     const formatDate = date => {
@@ -51,7 +51,7 @@ const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) =
     
     return (
         <form className='log-entry-form filter-entry-form' onSubmit={handleSubmit}>
-            <p className='form-txt' style={{fontStyle: 'italic'}}>Display all entries whose fields match the below...</p>
+            <p className='form-txt' style={{fontStyle: 'italic'}}>Display all entries whose fields match those below...</p>
             <input 
                 className='entry-form-input'
                 type='text'
@@ -67,6 +67,24 @@ const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) =
                     type='date'
                     name='date'
                     defaultValue={appliedFilters.date}
+                    onChange={handleChange}
+                />
+            </div>
+            <div className='flex-row'>
+                <input 
+                    className='form-input-sm entry-form-input'
+                    type='text'
+                    name='fish'
+                    placeholder='Fish Caught'
+                    defaultValue={appliedFilters.fish}
+                    onChange={handleChange}
+                />
+                <input 
+                    className='form-input-sm entry-form-input'
+                    type='text'
+                    name='lure'
+                    placeholder='Lure Used'
+                    defaultValue={appliedFilters.lure}
                     onChange={handleChange}
                 />
             </div>
