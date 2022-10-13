@@ -48,13 +48,14 @@ const Header = () => {
             `}>
                 {auth.isLoggedIn() ? 
                     <>
-
+                        <Link to='/view-all' className={`${activePage === 'view-all' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Recently Caught</Link>
                         <Link to='/dashboard' className={`${activePage === 'dashboard' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Dashboard</Link>
                         <Link to='/' onClick={handleLogout}>Logout</Link>
                         <p className='header-greeting'>Hello, <span>{auth.getName().split(' ')[0]}</span>!</p>
                     </>
                 :
                     <>
+                        <Link to='/view-all' className={`${activePage === 'view-all' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Recently Caught</Link>
                         <Link to='/signup' className={`${activePage === 'signup' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Sign Up</Link>
                         <Link to='/login' className={`${activePage === 'login' ? 'current-page' : ''}`} onClick={handleMenuOpen}>Log In</Link>
                     </>

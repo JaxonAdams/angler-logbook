@@ -27,7 +27,7 @@ const Dashboard = () => {
         document.title = 'Dashboard';
     }, []);
 
-    // get user
+    // get user logs
     useEffect(() => {
         // send user to login page if not logged in
         if (!auth.isLoggedIn()) {
