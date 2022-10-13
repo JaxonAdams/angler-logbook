@@ -19,7 +19,7 @@ const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) =
                 // console.log(`${filterField}: ${appliedFilters[filterField]}`);
 
                 filteredLogEntries = filteredLogEntries.filter(entry => {
-                    return entry[filterField].toLowerCase() === appliedFilters[filterField].toLowerCase();
+                    return entry[filterField].trim().toLowerCase() === appliedFilters[filterField].trim().toLowerCase();
                 });
             };
         };
