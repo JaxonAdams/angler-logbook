@@ -356,7 +356,7 @@ html, body {
     font-family: var(--title-font);
     text-align: center;
     width: 70%;
-    margin: 2rem auto;
+    margin: 1rem auto 2rem auto;
     padding: 1.5rem 0;
     border-bottom: 5px solid var(--color-primary);
 }
@@ -386,6 +386,138 @@ html, body {
 
 .logged-info-container p {
     flex: 1;
+}
+
+.logged-location {
+    width: 90%;
+	border-top: 1px solid var(--color-primary);
+	padding: 0.5rem 0;
+	margin: 0 auto;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.logged-info {
+    flex: 1;
+}
+
+.additional-info-container {
+    width: 90%;
+    margin: 0 auto;
+    border-top: 1px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.open-modal-container {
+    width: 100%;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.open-modal {
+    font-weight: normal;
+    width: auto;
+    margin: 1rem;
+    border: 2px solid var(--color-primary);
+    cursor: pointer;
+    flex: 1;
+}
+
+dialog {
+    background-color: var(--txt-light);
+    padding: 0.3rem 0.5rem;
+    width: 70vw;
+    font-size: 1.2rem;
+    border-radius: 18px;
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 0 100vw rgb(0 52 120 / 0.5); 
+}
+
+dialog::backdrop {
+    opacity: 0;
+}
+
+dialog[open] {
+	animation: 0.5s slide-up forwards, 0.5s fade-in forwards;
+}
+
+dialog[closing] {
+	animation: 0.3s fade-out forwards;
+}
+
+/* dialog::backdrop { */
+/*     background: linear-gradient(to top left, #003478, #E8E10C); */
+/*     opacity: 0.5; */
+/* } */
+
+/* dialog[open]::backdrop { */
+/* 	animation: 0.5s fade-in-bg forwards; */
+/* } */
+
+/* dialog[closing]::backdrop { */
+/* 	animation: 0.3s fade-out-bg forwards; */
+/* } */
+
+.modal-title {
+    margin: 0 1rem; 
+    font-family: var(--title-font);
+}
+
+.close-btn-container {
+    width: 100%;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.modal-close {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.log-entry-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log-entry-form div {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.entry-form-input {
+    font-size: 1.2rem;
+    width: 70%;
+    margin: 0 auto 0.5rem auto;
+    padding: 0.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+}
+
+.form-input-sm {
+    width: 45%;
+}
+
+.entry-form-submit {
+    margin: 0.5rem auto;
+    width: 70%;
+}
+
+.form-txt-sm {
+    font-size: 0.8rem;
 }
 /* end user dashboard styling */
 
@@ -425,6 +557,22 @@ html, body {
     .signup-img, .login-img {
         height: 300px;
         width: 70%;
+    }
+
+    .dashboard-title {
+        margin-top: 0rem;
+    }
+
+    .open-modal {
+        float: none;
+    }
+
+    .log-entry-form div {
+        flex-direction: column;
+    }
+
+    .form-input-sm {
+        width: 90%;
     }
 }
 
@@ -547,6 +695,22 @@ html, body {
     .logged-info-container {
         flex-direction: column;
     }
+
+    .dashboard-title {
+        width: 85%;
+    }
+
+    .log-entry {
+        width: 85%;
+    }
+
+    .entry-form-input {
+        font-size: 1rem;
+    }
+
+    .open-modal-container {
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -570,6 +734,18 @@ html, body {
     .header-nav {
         width: 80vw;
     }
+    
+    .flex-row {
+        flex-direction: column;
+    }
+
+    .entry-form-input {
+        font-size: 0.9rem;
+    }
+
+    dialog {
+        width: 90%;
+    }
 }
 
 @media screen and (max-width: 375px) {
@@ -581,4 +757,56 @@ html, body {
     .signup-img, .login-img {
         height: 200px;
     }
+}
+
+/* animation keyframes */
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;	
+	}
+}
+
+@keyframes fade-in-bg {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-out-bg {
+	0% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateY(50%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}
 }

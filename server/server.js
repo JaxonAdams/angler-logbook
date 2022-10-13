@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 // express middleware to parse data, use routes, etc
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', routes);
+app.use(routes);
 
 // if in production, provide static assets in build folder
 if (process.env.NODE_ENV === 'production') {

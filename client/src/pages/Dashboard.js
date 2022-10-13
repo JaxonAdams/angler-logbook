@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { XCircleFill } from 'react-bootstrap-icons';
 import auth from '../utils/auth';
+import { useStoreContext } from '../utils/state/GlobalState';
 
 // import components
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
+import LogEntryForm from '../components/LogEntryForm';
+import FilterEntryForm from '../components/FilterEntryForm';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
-    // logged in user, set in useEffect hook
-    const [user, setUser] = useState({});
+    // user's log entries, set in useEffect hook
+    const [logEntries, setLogEntries] = useState([]);
+    // filtered entries
+    const [filteredEntries, setFilteredEntries] = useState([]);
+    // is the modal open? will be used to disable scroll when open
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // pull isMenuOpen from global store
+    const [state] = useStoreContext();
+    const { isMenuOpen } = state;
+
+    // update page title
+    useEffect(() => {
+        document.title = 'Dashboard';
+    }, []);
 
     // get user
     useEffect(() => {
@@ -16,53 +34,111 @@ const Dashboard = () => {
             window.location.assign('/login');
         };
 
-        // get user id from JWT
-        const userId = auth.getId();
-
-        // fetch user data
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/users/${userId}`);
-                const data = await response.json();
-
-                return { ...data };
-            } catch (err) {
-                console.log(err);
-            };
-        };
-
-        fetchData().then(data => {
-            setUser(data);
+        fetchData().then(({logEntries}) => {
+            setLogEntries(logEntries);
         });
     }, []);
 
-    useEffect(() => console.log(user), [user]);
+    // disable scroll if modal is open, if not open endable scroll
+    useEffect(() => {
+        isModalOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible';
+    }, [isModalOpen]);
 
-    // should name have "'s" or single "'"
+    // format proper plural of user's name
     const formatWelcome = () => {
-        // user data may not have fetched yet; if not, do not try to format
-        if (user.name) {
+        // pull name from JWT
+        const name = auth.getName().split(' ')[0];
 
-            const lastLetter = user.name.split('')[user.name.length - 1];
+        // format welcome based on first name
+        return name[name.length - 1] === 's' ? `${name}' Fishing Log` : `${name}'s Fishing Log`;
+    };
 
-            if (lastLetter === 's' || lastLetter === 'S') {
-                return `${user.name}' Fishing Log`;
-            };
+    // fetch user data
+    const fetchData = async () => {
+        // get user id from JWT
+        const userId = auth.getId();
 
-            return `${user.name}'s Fishing Log`;
+        try {
+            const response = await fetch(`/api/users/${userId}`);
+            const data = await response.json();
+
+            return { ...data };
+        } catch (err) {
+            console.log(err);
         };
     };
 
+    const openFormModal = () => {
+		const modal = document.getElementById('newEntryModal'); 
+		modal.showModal();
+        setIsModalOpen(true);
+    };
+
+    const closeFormModal = () => {
+		const modal = document.getElementById('newEntryModal'); 
+		modal.setAttribute('closing', true);
+
+		modal.addEventListener('animationend', () => {
+			modal.removeAttribute('closing');
+			modal.close();
+            setIsModalOpen(false);
+		}, { once: true });
+    };
+
+    const openFilterModal = () => {
+        const modal = document.getElementById('filterEntryModal');
+        modal.showModal();
+        setIsModalOpen(true);
+    };
+
+    const closeFilterModal = () => {
+        const modal = document.getElementById('filterEntryModal');
+        modal.setAttribute('closing', true);
+
+        modal.addEventListener('animationend', () => {
+            modal.removeAttribute('closing');
+            modal.close();
+            setIsModalOpen(false);
+        }, { once: true });
+    };
+
     return (
-        <div className='dashboard'>
+        <div className={`dashboard ${isMenuOpen ? 'noscroll' : ''}`}>
             <Header />
+            <div className='open-modal-container'>
+                <button className='btn-link open-modal' onClick={() => openFormModal()}>New Log Entry</button>
+                <button className='btn-link open-modal' onClick={() => openFilterModal()}>Filter Entries</button>
+            </div>
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {user.logEntries && user.logEntries.sort((a,b) => a.date < b.date).map(entry => {
+                {filteredEntries.length ? filteredEntries.slice(0).reverse().map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
-                })}
+                })
+                :
+                    logEntries.length ? logEntries.slice(0).reverse().map(entry => {
+                        return <LogEntry entry={entry} key={entry._id} />
+                    })
+                    :
+                    <p className='form-txt'>Loading...</p>
+                }
             </div>
+            <dialog id='newEntryModal'>
+                <div className='close-btn-container'>
+                    <p className='modal-title'>New Log Entry</p>
+                    <XCircleFill className='modal-close' onClick={() => closeFormModal()} />
+                </div>
+                <LogEntryForm closeFormModal={closeFormModal} fetchData={fetchData} setLogEntries={setLogEntries} />
+            </dialog>
+            <dialog id='filterEntryModal'>
+                <div className='close-btn-container'>
+                    <p className='modal-title'>Filter Entries</p>
+                    <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
+                </div>
+                <FilterEntryForm closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
+            </dialog>
+            {/* I only want the footer to display once logs have loaded */}
+            {filteredEntries.length > 1 ? <Footer /> : ''}
         </div>
     );
 };
