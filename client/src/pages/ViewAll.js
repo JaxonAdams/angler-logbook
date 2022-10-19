@@ -35,7 +35,7 @@ const ViewAll = () => {
             <h1 className='view-all-title'>Recently Caught Fish</h1>
             <div className='entry-container'>
                 {/* sort all entries by date, then render LogEntry for each */}
-                {logEntries.length ? logEntries.slice(0).reverse().map(entry => {
+                {logEntries.length ? logEntries.map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />
                 })
                 :
