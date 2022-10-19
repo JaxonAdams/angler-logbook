@@ -34,7 +34,7 @@ const Dashboard = () => {
             window.location.assign('/login');
         };
 
-        fetchData().then(({logEntries}) => {
+        fetchData().then((logEntries) => {
             setLogEntries(logEntries);
         });
     }, []);
@@ -56,13 +56,14 @@ const Dashboard = () => {
     // fetch user data
     const fetchData = async () => {
         // get user id from JWT
-        const userId = auth.getId();
+        const encodedName = auth.getName().split(' ').join('%20');
 
         try {
-            const response = await fetch(`/api/users/${userId}`);
+            // const response = await fetch(`/api/users/${userId}`);
+            const response = await fetch(`/api/logs/user/${encodedName}`);
             const data = await response.json();
 
-            return { ...data };
+            return [ ...data ];
         } catch (err) {
             console.log(err);
         };
@@ -112,11 +113,11 @@ const Dashboard = () => {
             <h1 className='dashboard-title'>{formatWelcome()}</h1>
             <div className='entry-container'>
                {/* sort entries by date, then render LogEntry for each entry */} 
-                {filteredEntries.length ? filteredEntries.slice(0).reverse().map(entry => {
+                {filteredEntries.length ? filteredEntries.map(entry => {
                     return <LogEntry entry={entry} key={entry._id} />;
                 })
                 :
-                    logEntries.length ? logEntries.slice(0).reverse().map(entry => {
+                    logEntries.length ? logEntries.map(entry => {
                         return <LogEntry entry={entry} key={entry._id} />
                     })
                     :

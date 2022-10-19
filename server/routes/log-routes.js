@@ -6,6 +6,7 @@ const { Log, User } = require('../models');
 // GET all logs /api/logs/
 router.get('/', (req, res) => {
     Log.find({})
+        .sort({ date: 'desc' })
         .then(dbLogData => res.json(dbLogData))
         .catch(err => {
             console.log(err);
@@ -26,9 +27,9 @@ router.get('/:id', ({ params }, res) => {
         });
 });
 
-// GET all logs by name /api/logs/:name
+// GET all logs by name /api/logs/user/:name
 router.get('/user/:name', ({ params }, res) => {
-    User.findOne({ name: params.name }).select('logEntries').populate({ path: 'logEntries' })
+    Log.find({ name: params.name }).sort({ date: 'desc' })
         .then(dbUserData => {
             if (!dbUserData) return res.status(404).json({ message: 'User not found' });
 
