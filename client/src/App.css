@@ -352,7 +352,7 @@ html, body {
 /* end signup page styling */
 
 /* user dashboard styling */
-.dashboard-title {
+.dashboard-title, .view-all-title {
     font-family: var(--title-font);
     text-align: center;
     width: 70%;
@@ -559,7 +559,7 @@ dialog[closing] {
         width: 70%;
     }
 
-    .dashboard-title {
+    .dashboard-title, .view-all-title {
         margin-top: 0rem;
     }
 
@@ -696,7 +696,7 @@ dialog[closing] {
         flex-direction: column;
     }
 
-    .dashboard-title {
+    .dashboard-title, .view-all-title {
         width: 85%;
     }
 
