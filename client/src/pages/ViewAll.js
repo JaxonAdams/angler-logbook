@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useStoreContext } from '../utils/state/GlobalState';
 
 import Header from '../components/Header';
 import LogEntry from '../components/LogEntry';
@@ -6,6 +7,10 @@ import LogEntry from '../components/LogEntry';
 const ViewAll = () => {
     // log entries array, set in useEffect hook
     const [logEntries, setLogEntries] = useState([]);
+
+    // pull isMenuOpen from global store
+    const [state] = useStoreContext();
+    const { isMenuOpen } = state;
 
     // update title
     useEffect(() => {
@@ -30,7 +35,7 @@ const ViewAll = () => {
     };
 
     return (
-        <div className='view-all'>
+        <div className={`view-all ${isMenuOpen ? 'noscroll' : ''}`}>
             <Header />
             <h1 className='view-all-title'>Recently Caught Fish</h1>
             <div className='entry-container'>
