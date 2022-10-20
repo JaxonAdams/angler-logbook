@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useStoreContext } from '../utils/state/GlobalState';
+import auth from '../utils/auth';
 
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -19,7 +20,7 @@ const Home = ({ menuOpen, setMenuOpen }) => {
     return (
         <div className={`home ${isMenuOpen ? 'noscroll' : ''}`}>
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-            <Hero />
+            <Hero isLoggedIn={auth.isLoggedIn()} />
             <HomeInfo />
             <HomeWelcome />
             <Footer />
