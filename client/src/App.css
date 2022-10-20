@@ -521,6 +521,12 @@ dialog[closing] {
 }
 /* end user dashboard styling */
 
+/* view all styling */
+.view-all-open-modal {
+    flex: 0.5;
+}
+/* end view all styling */
+
 /* media queries */
 @media screen and (max-width: 1000px) {
     .community-photo {
