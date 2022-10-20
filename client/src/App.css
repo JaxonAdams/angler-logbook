@@ -108,6 +108,17 @@ html, body {
     color: var(--color-secondary);
 }
 
+.hero-txt {
+    color: var(--txt-light);
+    background: rgb(0 0 0 / 0.2);
+    border-radius: 8px;
+    width: auto;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 0 0 3px var(--txt-dark);
+}
+
 .btn-link {
     text-decoration: none;
     color: var(--txt-dark);
@@ -125,6 +136,11 @@ html, body {
 .btn-link:hover {
     background-color: var(--color-primary);
     color: var(--txt-light);
+}
+
+.btn-link.no-hover:hover {
+    background-color: var(--color-secondary);
+    color: var(--txt-dark);
 }
 /* end hero styling */
 
