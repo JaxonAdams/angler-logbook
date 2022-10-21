@@ -136,7 +136,7 @@ const Dashboard = () => {
                     <p className='modal-title'>Filter Entries</p>
                     <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
                 </div>
-                <FilterEntryForm closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
+                <FilterEntryForm currentPage='dashboard' closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
             </dialog>
             {/* I only want the footer to display once logs have loaded */}
             {filteredEntries.length > 1 ? <Footer /> : ''}

@@ -90,7 +90,7 @@ const ViewAll = () => {
                     <p className='modal-title'>Filter Entries</p>
                     <XCircleFill className='modal-close' onClick={() => closeFilterModal()} />
                 </div>
-                <FilterEntryForm closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
+                <FilterEntryForm currentPage='view-all' closeFilterModal={closeFilterModal} logEntries={logEntries} setFilteredEntries={setFilteredEntries} />
             </dialog>
         </div>
     );
