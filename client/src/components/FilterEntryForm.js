@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) => {
-    const [appliedFilters, setAppliedFilters] = useState({ location: '', date: '', fish: '', lure: '' });
+const FilterEntryForm = ({ currentPage, closeFilterModal, logEntries, setFilteredEntries }) => {
+    const [appliedFilters, setAppliedFilters] = useState({ location: '', date: '', fish: '', lure: '', name: '' });
 
     // format date to match date in logEntries obj
     const formatDate = date => {
@@ -52,6 +52,16 @@ const FilterEntryForm = ({ closeFilterModal, logEntries, setFilteredEntries }) =
     return (
         <form className='log-entry-form filter-entry-form' onSubmit={handleSubmit}>
             <p className='form-txt' style={{fontStyle: 'italic'}}>Display all entries whose fields match those below...</p>
+            {currentPage === 'view-all' && 
+            <input 
+                className='entry-form-input'
+                type='text'
+                name='name'
+                placeholder="Angler's Name"
+                defaultValue={appliedFilters.name}
+                onChange={handleChange}
+            />
+            }
             <input 
                 className='entry-form-input'
                 type='text'
