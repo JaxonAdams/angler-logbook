@@ -704,6 +704,11 @@ dialog[closing] {
     .welcome-container {
         width: 80vw;
         text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .welcome-container .btn-link {
+        margin: 1rem auto;
     }
 
     .welcome-img-container {
