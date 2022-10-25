@@ -18,7 +18,7 @@ const storage = multer.memoryStorage({
 const upload = multer({ storage }).single('image');
 
 // S3 service object
-const s3 = AWS.S3({
+const s3 = new AWS.S3({
     apiVersion: '2006-03-01'
 });
 

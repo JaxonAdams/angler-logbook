@@ -9,6 +9,6 @@ const imageRoutes = require('./image-routes');
 // use routes with the specified url
 router.use('/api/users', userRoutes);
 router.use('/api/logs', logRoutes);
-router.use('/api/images');
+router.use('/api/images', imageRoutes);
 
 module.exports = router;

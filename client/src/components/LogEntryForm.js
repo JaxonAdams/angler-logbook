@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import auth from '../utils/auth';
 
 const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
@@ -17,8 +17,11 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
         weight: '',
         other: ''
     });
+
     // error message state
     const [errorMessage, setErrorMessage] = useState('');
+
+    const fileInput = useRef(null);
 
     // sign name and user id to formState
     useEffect(() => {
@@ -37,7 +40,33 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
         setFormState({ ...formState, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = e => {
+    const handleImgSubmit = e => {
+        e.preventDefault();
+
+        const imageData = new FormData();
+        imageData.append('image', fileInput.current.files[0]);
+
+        const postImage = async () => {
+            try {
+                const res = await fetch('/api/images/image-upload', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: imageData
+                });
+
+                if (!res.ok) throw new Error(res.statusText);
+
+                const postResponse = await res.json();
+                setFormState({ ...formState, image: postResponse.Location });
+                return console.log('Image location: ' + postResponse.Location);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        postImage();
+    };
+
+    const handleSubmit = async e => {
         e.preventDefault();
 
         console.log(formState);
@@ -184,6 +213,16 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
                 placeholder='Other Info (250 char limit)'
                 onChange={handleChange}
             />
+            <div>
+                <input
+                    className='entry-form-input'
+                    type='file'
+                    accept='image/png, image/jpeg'
+                    name='fileInput'
+                    ref={fileInput}
+                />
+                <button onClick={handleImgSubmit} className='entry-form-input btn-link' style={{marginLeft: '1rem', fontWeight: '400'}}>Upload Image</button>
+            </div>
             <button className='submit-btn entry-form-submit' type='submit'>Submit</button>
         </form>
     );
