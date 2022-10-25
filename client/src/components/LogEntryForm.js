@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import auth from '../utils/auth';
 
 const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
@@ -17,8 +17,13 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
         weight: '',
         other: ''
     });
+    // image data
+    const [imageFormData, setImageFormData] = useState({});
+
     // error message state
     const [errorMessage, setErrorMessage] = useState('');
+
+    const fileInput = useRef(null);
 
     // sign name and user id to formState
     useEffect(() => {
@@ -35,6 +40,12 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
 
         // set form state to input value
         setFormState({ ...formState, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = e => {
+        e.preventDefault();
+
+        console.log('Saving image data...');
     };
 
     const handleSubmit = e => {
@@ -184,6 +195,16 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
                 placeholder='Other Info (250 char limit)'
                 onChange={handleChange}
             />
+            <div>
+                <label htmlFor='fileInput'>Upload Image: </label>
+                <input
+                    className='entry-form-input'
+                    type='file'
+                    name='fileInput'
+                    ref={fileInput}
+                    onChange={handleFileChange}
+                />
+            </div>
             <button className='submit-btn entry-form-submit' type='submit'>Submit</button>
         </form>
     );
