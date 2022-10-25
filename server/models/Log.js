@@ -42,7 +42,9 @@ const LogSchema = new Schema(
         other: {
             type: String,
             maxlength: 250
-        }
+        },
+        // image url
+        image: String
     },
     {
         id: false
