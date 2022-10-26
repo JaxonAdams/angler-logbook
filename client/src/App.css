@@ -535,6 +535,13 @@ dialog[closing] {
 .form-txt-sm {
     font-size: 0.8rem;
 }
+
+.logged-image {
+    width: 70%;
+    margin: 1rem 0;
+    border: 3px solid var(--color-primary);
+    border-radius: 3px;
+}
 /* end user dashboard styling */
 
 /* view all styling */
