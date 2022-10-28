@@ -21,6 +21,9 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
     // error message state
     const [errorMessage, setErrorMessage] = useState('');
 
+    // whether submit button is disabled; should disable while photo is being uploadedfalse
+    const [isDisabled, setIsDisabled] = useState(false);
+
     const fileInput = useRef(null);
 
     // sign name and user id to formState
@@ -46,6 +49,8 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
         const imageData = new FormData();
         imageData.append('image', fileInput.current.files[0]);
 
+        setIsDisabled(true);
+
         const postImage = async () => {
             try {
                 const res = await fetch('/api/images/image-upload', {
@@ -58,6 +63,7 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
 
                 const postResponse = await res.json();
                 setFormState({ ...formState, image: postResponse.Location });
+                setIsDisabled(false);
                 return console.log('Image location: ' + postResponse.Location);
             } catch (e) {
                 console.log(e);
@@ -223,7 +229,7 @@ const LogEntryForm = ({ closeFormModal, fetchData, setLogEntries }) => {
                 />
                 <button onClick={handleImgSubmit} className='entry-form-input btn-link' style={{marginLeft: '1rem', fontWeight: '400'}}>Upload Image</button>
             </div>
-            <button className='submit-btn entry-form-submit' type='submit'>Submit</button>
+            <button disabled={isDisabled} className={`submit-btn entry-form-submit ${isDisabled && 'disabled'}`} type='submit'>Submit</button>
         </form>
     );
 };

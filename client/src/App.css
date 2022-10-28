@@ -542,6 +542,15 @@ dialog[closing] {
     border: 3px solid var(--color-primary);
     border-radius: 3px;
 }
+
+.disabled {
+    background-color: gray;
+}
+
+.disabled:hover {
+    background-color: gray;
+    color: var(--txt-light);
+}
 /* end user dashboard styling */
 
 /* view all styling */
